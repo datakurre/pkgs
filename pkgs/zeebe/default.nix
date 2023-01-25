@@ -20,7 +20,7 @@ stdenv.mkDerivation rec {
     for script in broker gateway restore
     do
       mv $out/bin/$script $out/bin/.$script
-#     sed -i "s|sys:app.home}/logs|env:ZEEBE_LOG_PATH}|g" $out/config/log4j2.xml
+      sed -i "s|sys:app.home}/logs|env:ZEEBE_LOG_PATH}|g" $out/config/log4j2.xml
       makeWrapper $out/bin/.$script $out/bin/$script \
         --prefix PATH : "${jdk}/bin" \
         --set JAVA_HOME "${jdk}/lib/openjdk"

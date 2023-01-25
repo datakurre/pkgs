@@ -41,7 +41,8 @@
     apps = {
       cmndseven-cli = args.cmndseven-cli.apps.${system}.default;
       rcc = { type = "app"; program = self.packages.${system}.rcc + "/bin/rcc"; };
-      zeebe = { type = "app"; program = self.packages.${system}.zeebe + "/bin/broker"; };
+      # ZEEBE_LOG_PATH=$(pwd) ZEEBE_BROKER_DATA_DIRECTORY=$(pwd) nix run .#zeebe --impure
+      zeebe = { type = "app"; program = self.packages.${system}.zeebe + "bin/broker"; };
     };
 
     # Packages

@@ -17,4 +17,4 @@ jobs:
         name: datakurre
         signingKey: '${{ secrets.CACHIX_SIGNING_KEY }}'
     - run: >
-        nix develop --command echo "ok";
+        nix develop --accept-flake-config --command echo "ok";

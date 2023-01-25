@@ -1,0 +1,5 @@
+.idea/
+.vagrant/
+result
+html
+__pycache__/

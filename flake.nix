@@ -35,9 +35,10 @@
     zeebe-simple-monitor = { url = "https://github.com/camunda-community-hub/zeebe-simple-monitor/releases/download/2.4.1/zeebe-simple-monitor-2.4.1.zip"; flake = false; };
   };
 
-  # Systems
+  # Outputs
   outputs = { self, nixpkgs, flake-utils, ... }@args: flake-utils.lib.eachDefaultSystem (system: let pkgs = nixpkgs.legacyPackages.${system}; in {
 
+    # Apps not equal to package name
     apps = {
       cmndseven-cli = args.cmndseven-cli.apps.${system}.default;
       rcc = { type = "app"; program = self.packages.${system}.rcc + "/bin/rcc"; };

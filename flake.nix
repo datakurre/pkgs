@@ -8,6 +8,7 @@
   };
 
   inputs = {
+  
     # Flakes
     flake-utils.url = "github:numtide/flake-utils";
     nixpkgs.url = "github:NixOS/nixpkgs/release-22.11";
@@ -35,7 +36,6 @@
     zeebe-simple-monitor = { url = "https://github.com/camunda-community-hub/zeebe-simple-monitor/releases/download/2.4.1/zeebe-simple-monitor-2.4.1.zip"; flake = false; };
   };
 
-  # Outputs
   outputs = { self, nixpkgs, flake-utils, ... }@args: flake-utils.lib.eachDefaultSystem (system: let pkgs = nixpkgs.legacyPackages.${system}; in {
 
     # Apps not equal to package name

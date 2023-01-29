@@ -1,6 +1,6 @@
-{ pkgs, npmlock2nix, src }:
+{ lib, makeWrapper, npmlock2nix, nodejs, chromium, src }:
 
-(import npmlock2nix { inherit pkgs; }).v1.build rec {
+npmlock2nix.v1.build rec {
   inherit src;
   installPhase = ''
     mkdir -p $out/bin $out/lib
@@ -13,12 +13,12 @@
                 "'$out/lib'"
     substituteInPlace $out/lib/index.js \
       --replace "puppeteer.launch();" \
-                "puppeteer.launch({executablePath: '${pkgs.chromium}/bin/chromium'});"
+                "puppeteer.launch({executablePath: '${chromium}/bin/chromium'});"
     wrapProgram $out/bin/dmn-to-html \
-      --set PATH ${pkgs.lib.makeBinPath [ pkgs.nodejs ]} \
+      --set PATH ${lib.makeBinPath [ nodejs ]} \
       --set NODE_PATH $out/lib/node_modules
   '';
-  buildInputs = [ pkgs.makeWrapper ];
+  buildInputs = [ makeWrapper ];
   buildCommands = [];
   node_modules_attrs = {
     PUPPETEER_SKIP_DOWNLOAD = "true";

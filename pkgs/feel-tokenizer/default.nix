@@ -1,6 +1,6 @@
-{ pkgs, npmlock2nix, src }:
+{ lib, makeWrapper, nodejs, npmlock2nix, pkgs, src }:
 
-(import npmlock2nix { inherit pkgs; }).v2.build {
+npmlock2nix.v2.build rec {
   inherit src;
   installPhase = ''
     mkdir -p $out/bin $out/lib $out/lib/lezer-feel/lezer-feel
@@ -47,10 +47,10 @@ console.log(JSON.stringify(((source, tree) => {
 EOF
     chmod u+x $out/bin/feel-tokenizer
     wrapProgram $out/bin/feel-tokenizer \
-      --set PATH ${pkgs.lib.makeBinPath [ pkgs.nodejs ]} \
+      --set PATH ${lib.makeBinPath [ nodejs ]} \
       --set NODE_PATH $out/lib/lezer-feel:$out/lib/node_modules
   '';
-  buildInputs = [ pkgs.makeWrapper ];
+  buildInputs = [ makeWrapper ];
   buildCommands = [ "npm run build" ];
   node_modules_attrs = {
     preBuild = ''

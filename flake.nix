@@ -12,6 +12,7 @@
     # Flakes
     flake-utils.url = "github:numtide/flake-utils";
     nixpkgs.url = "github:NixOS/nixpkgs/release-22.11";
+    poetry2nix = { url = "github:nix-community/poetry2nix"; inputs.nixpkgs.follows = "nixpkgs"; inputs.flake-utils.follows = "flake-utils"; };
 
     # Tools
     npmlock2nix = { url = "github:nix-community/npmlock2nix"; flake = false; };
@@ -36,7 +37,7 @@
     zeebe-simple-monitor = { url = "https://github.com/camunda-community-hub/zeebe-simple-monitor/releases/download/2.4.1/zeebe-simple-monitor-2.4.1.zip"; flake = false; };
   };
 
-  outputs = { self, nixpkgs, flake-utils, ... }@inputs: flake-utils.lib.eachDefaultSystem (system: let pkgs = nixpkgs.legacyPackages.${system}; in {
+  outputs = { self, nixpkgs, flake-utils, ... }@inputs: flake-utils.lib.eachDefaultSystem (system: let pkgs = import nixpkgs { inherit system; overlays = [ poetry2nix.overlay ]; in {
 
     # Apps not equal to package name
     apps = {
@@ -67,6 +68,9 @@
 
     # Overlay
     overlays.default = final: prev: {
+      npmlock2nix = npmlock2nix { inherit pkgs; });
+      inherit (pkgs)
+      poetry2nix;
       inherit (self.packages.${system})
       bpmn-to-image
       camunda-modeler

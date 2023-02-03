@@ -107,5 +107,6 @@
         self.packages.${system}.zeebe-simple-monitor
       ];
     };
+    devShells.plone = pkgs.callPackage ./pkgs/buildout/shell.nix { inherit nixpkgs system; };
   });
 }

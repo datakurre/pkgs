@@ -108,5 +108,6 @@
       ];
     };
     devShells.plone = pkgs.callPackage ./pkgs/buildout/shell.nix { inherit nixpkgs system; };
+    devShells.plone-python2 = pkgs.callPackage ./pkgs/buildout-2.x/shell.nix { inherit nixpkgs system; };
   });
 }

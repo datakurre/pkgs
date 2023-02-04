@@ -31,9 +31,10 @@ pkgs.mkShell {
       ps.lxml
       ps.pillow
       ps.setuptools
-      # And
-      ps.tox  # for bobtemplates.plone
+      # Buildout patched to prioritize nixpkgs
       ps.zc_buildout_nix  # support packages from nixpkgs
+      # Tox for obtemplates.plone
+      ps.tox
     ]))
     pkgs.pcre
   ];

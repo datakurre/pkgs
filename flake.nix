@@ -112,6 +112,6 @@
     devShells.plone-python3 = pkgs.callPackage ./pkgs/buildout/shell.nix { inherit nixpkgs system; python = "python3"; };
     devShells.plone-python39 = pkgs.callPackage ./pkgs/buildout/shell.nix { inherit nixpkgs system; python = "python39"; };
     devShells.plone-python310 = pkgs.callPackage ./pkgs/buildout/shell.nix { inherit nixpkgs system; python = "python310"; };
-    devShells.plone-python311 = pkgs.callPackage ./pkgs/buildout/shell.nix { inherit nixpkgs system; python = "python311"; };
+#   devShells.plone-python311 = pkgs.callPackage ./pkgs/buildout/shell.nix { inherit nixpkgs system; python = "python311"; };
   });
 }

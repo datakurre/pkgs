@@ -1,14 +1,16 @@
-{ nixpkgs, system }:
+{ nixpkgs, system, python }:
 
 let
 
   overlay = _: pkgs: {
-    python3 = pkgs.python3.override {
+    "${python}" = (builtins.getAttr python pkgs).override {
       packageOverrides = self: super: {
         zc_buildout_nix = self.callPackage ./. {
           inherit (super)
           buildPythonPackage
-          fetchPypi;
+          fetchPypi
+          pip
+          wheel;
         };
       };
     };
@@ -24,8 +26,8 @@ in
 
 pkgs.mkShell {
   buildInputs = [
-    pkgs.black
-    (pkgs.python3.withPackages(ps: [
+    # Python
+    ((builtins.getAttr python pkgs).withPackages(ps: [
       # Packages that need to come from nixpkgs
       ps.cryptography
       ps.lxml
@@ -36,6 +38,8 @@ pkgs.mkShell {
       # Tox for obtemplates.plone
       ps.tox
     ]))
+    # Tools
+    pkgs.black
     pkgs.pcre
   ];
 }

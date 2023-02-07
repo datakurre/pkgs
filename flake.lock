@@ -1,5 +1,30 @@
 {
   "nodes": {
+    "android-nixpkgs": {
+      "inputs": {
+        "devshell": "devshell",
+        "flake-utils": [
+          "flake-utils"
+        ],
+        "nixpkgs": [
+          "nixpkgs-unstable"
+        ]
+      },
+      "locked": {
+        "lastModified": 1675714933,
+        "narHash": "sha256-CQ/n7i9702AP0v+Jg/OjsUqtUyR6i9XtLsT2sq9LYTA=",
+        "owner": "tadfisher",
+        "repo": "android-nixpkgs",
+        "rev": "061e95216ab022490d9cca0eb2b81d94b7fb39c5",
+        "type": "github"
+      },
+      "original": {
+        "owner": "tadfisher",
+        "ref": "stable",
+        "repo": "android-nixpkgs",
+        "type": "github"
+      }
+    },
     "bpmn-to-image": {
       "flake": false,
       "locked": {
@@ -50,6 +75,31 @@
         "owner": "datakurre",
         "ref": "main",
         "repo": "cmndseven-cli",
+        "type": "github"
+      }
+    },
+    "devshell": {
+      "inputs": {
+        "flake-utils": [
+          "android-nixpkgs",
+          "nixpkgs"
+        ],
+        "nixpkgs": [
+          "android-nixpkgs",
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1675340818,
+        "narHash": "sha256-GAzTgOvonq4K3CVyyKZGbCnqdLi6nRe78t8ko/mLxL0=",
+        "owner": "numtide",
+        "repo": "devshell",
+        "rev": "2e19b92980a79118351ec12496a81c49bd674d8a",
+        "type": "github"
+      },
+      "original": {
+        "owner": "numtide",
+        "repo": "devshell",
         "type": "github"
       }
     },
@@ -143,6 +193,22 @@
       "original": {
         "owner": "NixOS",
         "ref": "release-22.11",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
+    "nixpkgs-unstable": {
+      "locked": {
+        "lastModified": 1675752953,
+        "narHash": "sha256-WKNpG5peliZdkdjm1oSTtO1/rSFdEJJD84ZvUPVe+ZU=",
+        "owner": "NixOS",
+        "repo": "nixpkgs",
+        "rev": "49b61336534b60897539e3526af9147e23f1e015",
+        "type": "github"
+      },
+      "original": {
+        "owner": "NixOS",
+        "ref": "master",
         "repo": "nixpkgs",
         "type": "github"
       }
@@ -312,6 +378,7 @@
     },
     "root": {
       "inputs": {
+        "android-nixpkgs": "android-nixpkgs",
         "bpmn-to-image": "bpmn-to-image",
         "camunda-modeler": "camunda-modeler",
         "cmndseven-cli": "cmndseven-cli",
@@ -320,6 +387,7 @@
         "form-js-to-image": "form-js-to-image",
         "lezer-feel": "lezer-feel",
         "nixpkgs": "nixpkgs",
+        "nixpkgs-unstable": "nixpkgs-unstable",
         "npmlock2nix": "npmlock2nix",
         "parrot-rcc": "parrot-rcc",
         "poetry2nix": "poetry2nix_3",

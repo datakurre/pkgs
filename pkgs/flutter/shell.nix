@@ -5,6 +5,7 @@ let
   android-sdk = (sdk (ps: [
     ps.cmdline-tools-latest
     ps.build-tools-29-0-2
+    ps.build-tools-32-0-0
     ps.build-tools-30-0-3
     ps.tools
     ps.patcher-v4

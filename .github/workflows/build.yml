@@ -20,3 +20,4 @@ jobs:
         nix develop --accept-flake-config --command echo "ok";
         nix develop .#plone --accept-flake-config --command echo "ok";
         nix develop .#plone-python2 --accept-flake-config --command echo "ok";
+        nix develop .#flutter --accept-flake-config --command echo "ok";

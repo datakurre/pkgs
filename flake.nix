@@ -46,7 +46,7 @@
     # Apps not equal to package name
     apps = {
       cmndseven-cli = inputs.cmndseven-cli.apps.${system}.default;
-      rcc = { type = "app"; program = self.packages.${system}.rcc + "/bin/rcc"; };
+      rcc = { type = "app"; program = self.packages.${system}.rccFHSUserEnv + "/bin/rcc"; };
       # ZEEBE_LOG_PATH=$(pwd) ZEEBE_BROKER_DATA_DIRECTORY=$(pwd) nix run .#zeebe --impure
       zeebe = { type = "app"; program = self.packages.${system}.zeebe + "bin/broker"; };
     };

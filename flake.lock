@@ -197,6 +197,22 @@
         "type": "github"
       }
     },
+    "nixpkgs-buildout": {
+      "locked": {
+        "lastModified": 1685573264,
+        "narHash": "sha256-Zffu01pONhs/pqH07cjlF10NnMDLok8ix5Uk4rhOnZQ=",
+        "owner": "NixOS",
+        "repo": "nixpkgs",
+        "rev": "380be19fbd2d9079f677978361792cb25e8a3635",
+        "type": "github"
+      },
+      "original": {
+        "owner": "NixOS",
+        "ref": "release-22.05",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
     "nixpkgs-unstable": {
       "locked": {
         "lastModified": 1675752953,
@@ -387,6 +403,7 @@
         "form-js-to-image": "form-js-to-image",
         "lezer-feel": "lezer-feel",
         "nixpkgs": "nixpkgs",
+        "nixpkgs-buildout": "nixpkgs-buildout",
         "nixpkgs-unstable": "nixpkgs-unstable",
         "npmlock2nix": "npmlock2nix",
         "parrot-rcc": "parrot-rcc",

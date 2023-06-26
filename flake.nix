@@ -14,6 +14,9 @@
     nixpkgs.url = "github:NixOS/nixpkgs/release-22.11";
     poetry2nix = { url = "github:nix-community/poetry2nix"; inputs.nixpkgs.follows = "nixpkgs"; inputs.flake-utils.follows = "flake-utils"; };
 
+    # Plone
+    nixpkgs-buildout.url = "github:NixOS/nixpkgs/release-22.05";
+
     # Android
     nixpkgs-unstable.url = "github:NixOS/nixpkgs/master";
     android-nixpkgs = { url = "github:tadfisher/android-nixpkgs/stable"; inputs.nixpkgs.follows = "nixpkgs-unstable"; inputs.flake-utils.follows = "flake-utils"; };
@@ -41,7 +44,7 @@
     zeebe-simple-monitor = { url = "https://github.com/camunda-community-hub/zeebe-simple-monitor/releases/download/2.4.1/zeebe-simple-monitor-2.4.1.zip"; flake = false; };
   };
 
-  outputs = { self, nixpkgs, flake-utils, ... }@inputs: flake-utils.lib.eachDefaultSystem (system: let pkgs = import nixpkgs { inherit system; overlays = [ inputs.poetry2nix.overlay (final: prev: { npmlock2nix = import inputs.npmlock2nix { pkgs = final; }; }) ]; }; pkgs-android = import inputs.nixpkgs-unstable { inherit system; config = { android_sdk.accept_license = true; allowUnfree = true; }; }; in {
+  outputs = { self, nixpkgs, flake-utils, ... }@inputs: flake-utils.lib.eachDefaultSystem (system: let pkgs = import nixpkgs { inherit system; overlays = [ inputs.poetry2nix.overlay (final: prev: { npmlock2nix = import inputs.npmlock2nix { pkgs = final; }; }) ]; }; pkgs-android = import inputs.nixpkgs-unstable { inherit system; config = { android_sdk.accept_license = true; allowUnfree = true; }; }; pkgs-buildout = import inputs.nixpkgs-buildout { inherit system; }; in {
 
     # Apps not equal to package name
     apps = {
@@ -115,9 +118,9 @@
     devShells.plone = pkgs.callPackage ./pkgs/buildout/shell.nix { inherit nixpkgs system; python = "python3"; };
     devShells.plone-python2 = pkgs.callPackage ./pkgs/buildout-2.x/shell.nix { inherit nixpkgs system; };
     devShells.plone-python3 = pkgs.callPackage ./pkgs/buildout/shell.nix { inherit nixpkgs system; python = "python3"; };
-    devShells.plone-python39 = pkgs.callPackage ./pkgs/buildout/shell.nix { inherit nixpkgs system; python = "python39"; };
-    devShells.plone-python310 = pkgs.callPackage ./pkgs/buildout/shell.nix { inherit nixpkgs system; python = "python310"; };
-#   devShells.plone-python311 = pkgs.callPackage ./pkgs/buildout/shell.nix { inherit nixpkgs system; python = "python311"; };
+    devShells.plone-python39 = pkgs-buildout.callPackage ./pkgs/buildout/shell.nix { nixpkgs = inputs.nixpkgs-buildout; inherit system; python = "python39"; };
+    devShells.plone-python310 = pkgs-buildout.callPackage ./pkgs/buildout/shell.nix { nixpkgs = inputs.nixpkgs-buildout; inherit system; python = "python310"; };
+    # devShells.plone-python311 = pkgs-buildout.callPackage ./pkgs/buildout/shell.nix { nixpkgs = inputs.nixpkgs-buildout; inherit system; python = "python311"; };
     devShells.flutter = pkgs-android.callPackage ./pkgs/flutter/shell.nix { inherit (self.packages.${system}) flutter; sdk = inputs.android-nixpkgs.sdk.${system}; };
   });
 }
